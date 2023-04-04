@@ -1,0 +1,180 @@
+openapi: 3.0.0
+info:
+  version: "v1"
+  title: 'PiM ID-KPN'
+  description: >-
+   This KPN API generates company-specific QR-code using the Personal Identification Manager (PiM) QR-code services.
+
+    ### Key highlights
+
+    - **Sandbox:** Full-fledged capabilities.
+
+    - **Security:**  HTTPS, OAuth, Rate limit.
+
+    - **Versioning:**  Supports version-less API, version tight. If no version
+    is provided (in header) it defaults to latest version. 
+
+
+    ## [Source view](https://app.swaggerhub.com/apis/kpn/PiMID-KPN/)<br/>
+    [Documentation view](https://app.swaggerhub.com/apis-docs/kpn/PiMID-KPN/)
+    
+    ---
+    
+    ## [KPN API Store](https://developer.kpn.com/)<br/>
+    [Getting Started](https://developer.kpn.com/getting-started)
+
+    
+    ---
+  contact:
+    name: API Support
+    email: api_developer@kpn.com
+    url: 'https://developer.kpn.com/support'
+  termsOfService: 'https://developer.kpn.com/legal'
+servers:
+  - url: 'https://api-prd.kpn.com/kpn/qrcodegenerator'
+externalDocs:
+  description: HTTP response headers
+  url: https://developer.kpn.com/documentation-response-headers
+paths:
+  /image:
+    post:
+      summary: Generates QR-code.
+      description: Generates QR-code as Base64 byte array, which can be saved as SVG file. Retrieve all active incidents.
+      operationId: GenerateQRCode
+      security:
+      - oauth2: []
+      parameters:
+        - $ref: "#/components/parameters/api_version"
+      requestBody:
+        $ref: '#/components/requestBodies/qrcodedata'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/text:
+              example:
+                "iVBORw0KGgoAAAANSUhEUgAAAV4AAAFeAQAAAADlUEq3AAAD40lEQVR42u2aQa6jQAxEjbJgyRG4SXKxSETiYnATjsCSBcJTVW7+VwKLmdXIEZEmPySPkXC77bLd5n//Wu2CL/iCL/iCL/iC"
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        429:
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api-prd.kpn.com/oauth/client_credential/accesstoken?grant_type=client_credentials
+          scopes : {}
+  requestBodies:
+    qrcodedata:
+      required: true
+      content:
+        'application/json':
+          schema:
+            type: object
+            properties:
+              redirect:
+                type: string
+                example: "1"
+                default: "{{redirect}}"
+              title:
+                type: string
+                example: "Enter the title of the QR-code here."
+                default : "{{title}}"
+              description:
+                type: string
+                example: "Here you can describe what information you need from your customers to create the QR-code."
+                default : "{{description}}"
+              attributes:
+                type: string
+                example: "Email,Mobile,Bankaccountnumber,NickName,Initials,FirstName,FamilyNamePrefix,FamilyName,BirthName,DateOfBirth,PlaceOfBirth,Gender,HeadShot,BankIdentificationNumber,BankAccountHolderName"
+                default : "{{attributes}}"
+              width:
+                type: string
+                example: "400"
+                default : "{{width}}"
+              height:
+                type: string
+                example: "400"
+                default : "{{height}}"
+            required:
+              - redirect
+              - title
+              - description
+              - attributes
+  parameters:
+    api_version:
+      in: header
+      name: api-version
+      schema:
+        type: string
+        default : ""
+      description: >-
+          API Version. If no version is provided it defaults to latest version.
+      required: false
+    api_version_query:
+      in: query
+      name: api-version
+      schema:
+        type: string
+        default : ""
+      description: >-
+          API Version. If no version is provided it defaults to latest version.
+      required: false
+  schemas:
+    error:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Transaction id of the the request.
+          title: Transaction ID
+        status:
+          type: string
+          description: Status
+          title: Status
+        name:
+          type: string
+          description: Error name
+          title: Error name
+        message:
+          type: string
+          description: Error message
+          title: Error message
+        info:
+          type: string
+          description: Additional information about error.
+          title: Info
