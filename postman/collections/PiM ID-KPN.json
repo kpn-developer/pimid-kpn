@@ -444,6 +444,11 @@
 		"type": "oauth2",
 		"oauth2": [
 			{
+				"key": "client_authentication",
+				"value": "body",
+				"type": "string"
+			},
+			{
 				"key": "clientSecret",
 				"value": "{{client_secret}}",
 				"type": "string"
@@ -477,11 +482,6 @@
 				"key": "addTokenTo",
 				"value": "header",
 				"type": "string"
-			},
-			{
-				"key": "client_authentication",
-				"value": "header",
-				"type": "string"
 			}
 		]
 	},
@@ -489,7 +489,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "8797a918-2bf8-4069-bc8b-d44e31806290",
+				"id": "06136568-f3cd-44b1-b3d3-308787e6697e",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -499,7 +499,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "3d21ba40-bf86-42ab-9f0b-6292c22a0a1f",
+				"id": "1371e234-3b37-481d-bf05-0e6c28c7028a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -509,54 +509,54 @@
 	],
 	"variable": [
 		{
-			"id": "06967b1b-3d26-4039-a5f3-9863e290820f",
+			"id": "850389be-06b8-486c-9ae5-8813c2d25e65",
 			"key": "baseUrl",
 			"value": "https://api-prd.kpn.com/kpn/qrcodegenerator"
 		},
 		{
-			"id": "aa98d285-a08f-446a-bd4a-e841fb6747d4",
+			"id": "adb720f9-4004-4df4-bcfb-23827fbf2b44",
 			"key": "client_id",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "a0cfe8e4-77f4-4813-9310-90021fd1b448",
+			"id": "6d8dc8dc-a106-4869-b885-d78e27fa2e6b",
 			"key": "client_secret",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "3a3383dc-9d99-4ee9-b771-52dc1c396929",
+			"id": "d2817aba-133f-4811-8435-7b0dc2c5f4fd",
 			"key": "redirect",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "8dec0962-abf5-4b13-86c4-1d9f81300bff",
+			"id": "41acde8e-a02d-43e4-8095-4a6c4e032cf3",
 			"key": "title",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "d1e8b1d0-26f9-40d0-95fa-2fcb3825715a",
+			"id": "d4ce2f38-e53e-4ee5-9ff7-3e190db35d16",
 			"key": "description",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "0bb7745d-1d7e-4ab9-9810-5396b6a7850c",
+			"id": "8dc0e653-5bb0-40b7-9dd7-2bbb0c042938",
 			"key": "attributes",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "dedfd53c-66df-4f23-80e3-6bc27dadbb5f",
+			"id": "4bb9615c-58d8-4f3c-b3a5-66beeaad75df",
 			"key": "width",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "d3aec384-0755-46b4-94c8-bddb67531ae4",
+			"id": "f0b400d1-a73c-4043-ac18-532732199313",
 			"key": "height",
 			"value": "",
 			"type": "string"
